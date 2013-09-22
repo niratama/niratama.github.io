@@ -4,7 +4,8 @@
   <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <link rel="alternate" type="application/atom+xml" title="Atom" href="<: '/atom.xml' | uri_for :>">
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<: '/static/css/blog.css' | uri_for :>" rel="stylesheet">
   <title>
   : block title -> {
     <: $blog.title :>
@@ -12,19 +13,22 @@
   </title>
 </head>
 <body>
+<div class="container">
   <header>
-    <h1><a href="<: '/' | uri_for :>"><: $blog.title :></a></h1>
+    <h1 class="page-header"><a href="<: '/' | uri_for :>"><: $blog.title :></a></h1>
   </header>
   <section>
   : block content -> { }
   </section>
   <footer>
-    <p>author: <: $blog.author :></p>
+    <hr>
+    <p><: $blog.author :> <a href="https://twitter.com/Niratama" class="twitter-follow-button" data-show-count="false">Follow @Niratama</a></p>
   </footer>
-
+</div>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
   <script>$(function(){$('pre > code').addClass('prettyprint');});</script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </body>
 </html>

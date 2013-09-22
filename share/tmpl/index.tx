@@ -1,25 +1,33 @@
 : cascade base
 : around content -> {
-<nav>
-  <ul>
-    <li><a href="<: '/archives.html' | uri_for :>">Archives</a></li>
-  </ul>
-</nav>
-:   for $blog.entries(limit => 10) -> $entry {
-<article>
-  <h1><a href="<: $entry.site_path | uri_for :>"><: $entry.title :></a></h1>
-  <time pubdate><: $entry.published_at().strftime('%Y-%m-%d %H:%M') :></time>
-  <: $entry.html_body_without_title() | mark_raw :>
-</article>
-:   }
-:   if $blog.tags().size() {
-<aside class="tags">
-  <h1>Tags</h1>
-  <ul class="tags">
-  :     for $blog.tags() -> $tag {
-  <li><a href="<: $tag.site_path | uri_for :>"><: $tag.name :>(<: $tag.count :>)</a></li>
-  :      }
-  </ul>
-</aside>
-:   }
+<div class="row">
+  <div class="col-md-9">
+  : for $blog.entries(limit => 10) -> $entry {
+    <article>
+      <h1><a href="<: $entry.site_path | uri_for :>"><: $entry.title :></a> <a href="https://twitter.com/share" class="twitter-share-button" data-url="<: $entry.site_path | uri_for :>" data-via="Niratama" data-lang="en">Tweet</a></h1>
+      <div class="pubdate">
+        <time pubdate><: $entry.published_at().strftime('%Y-%m-%d %H:%M') :></time>
+      </div>
+      <: $entry.html_body_without_title() | mark_raw :>
+    </article>
+  : }
+  </div>
+  <div class="col-md-3">
+    <nav>
+      <ul class="list-group">
+        <li class="list-group-item"><a href="<: '/archives.html' | uri_for :>">Archives</a></li>
+      </ul>
+    </nav>
+    : if $blog.tags().size() {
+      <aside class="tags">
+        <h1>Tags</h1>
+        <ul class="tags list-group">
+        : for $blog.tags() -> $tag {
+          <li class="list-group-item"><a href="<: $tag.site_path | uri_for :>"><: $tag.name :> <span class="badge pull-right"><: $tag.count :></span></a></li>
+        : }
+        </ul>
+      </aside>
+    : }
+  </div>
+</div>
 : }
