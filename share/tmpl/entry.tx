@@ -28,10 +28,13 @@
       </aside>
       : }
       <div class="entry">
-        <: $entry.html_body() | mark_raw :>
+        <h1><a href="<: $entry.site_path | uri_for :>"><: $entry.title :></a> <a href="https://twitter.com/share" class="twitter-share-button" data-url="<: $entry.site_path | uri_for :>" data-via="Niratama" data-lang="en">Tweet</a></h1>
+        <div class="pubdate">
+          <time pubdate><: $entry.published_at().strftime('%Y-%m-%d %H:%M') :></time>
+        </div>
+        <: $entry.html_body_without_title() | mark_raw :>
       </div>
       <div class="meta">
-        Created at <: $entry.published_at().strftime('%Y-%m-%d %H:%M') :><br>
         Last modified at <: $entry.last_modified_at().strftime('%Y-%m-%d %H:%M') :>
       </div>
     </article>
