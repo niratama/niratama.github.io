@@ -1,0 +1,34 @@
+body {
+  background: gray;
+}
+
+header {
+}
+
+div.container {
+  background: white;
+}
+
+article div.pubdate {
+  text-align: right;
+}
+
+article h1 {
+  font-size: x-large;
+}
+
+article h2 {
+  font-size: large;
+  border-bottom: 1px dotted gray;
+}
+
+aside h1 {
+  font-size: large;
+}
+
+aside .label a {
+  color: white;
+}
+article div.meta {
+  text-align: right;
+}

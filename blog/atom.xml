@@ -5,10 +5,72 @@
 <author>こばやし &apos;にらたま&apos; けんいち</author>
 <generator uri="https://github.com/Songmu/p5-Riji" version="0.0.10">Perl Riji</generator>
 <id>tag:nira.poi.jp,2013-09-22:blog:</id>
-<updated>2013-09-22T16:29:53+09:00</updated>
+<updated>2013-09-22T19:56:07+09:00</updated>
+<entry>
+<title type="text">YAPC::Asia Tokyo 2013に参加してきました</title>
+<link href="http://nira.poi.jp/blog/entry/2013-09-22-03.html" />
+<author>
+<name>Kenichi Kobayashi</name>
+</author>
+<content><![CDATA[<h1>YAPC::Asia Tokyo 2013に参加してきました</h1>
+
+<p>という訳で、<a href="http://yapcasia.org/2013/09/yapcasia-2013.html">「ブログを書くまでがYAPC」</a>だそうなので感想エントリを書いてみます。</p>
+
+<h2>会場</h2>
+
+<p>駅からも近くて、会場内の移動が基本フラットだったのが便利でした。</p>
+
+<p>ただ、受付〜メインホール出入口はボトルネックになっていた感じ。
+屋台村は通路に設置しないほうが、屋台がみたい人にとっても通路を通るだけの人にとっても良かった気はします。</p>
+
+<p>提灯とか飾ってあってお祭りっぽい雰囲気はなかなか良かったので、次回もうちょっとスペースとってやってもいいかと。</p>
+
+<h2>会場ネットワーク</h2>
+
+<p>一部のアクセスポイントで、繋がっているようにみえてデータが流れない、という状況が発生することがありましたが、 それ以外は快適で非常に助かりました。</p>
+
+<h2>ランチセッション</h2>
+
+<p>お弁当美味しかったですｗ</p>
+
+<h2>トーク</h2>
+
+<p>自分の興味半分、仕事に使えそうなネタ半分で選んだ感じですが、裏で行けなかったトークにも面白そうなのが沢山あって、今回は特にぎりぎりまでどれにするか迷いました。</p>
+
+<p>多目的教室を使う一部のトークが大入りになっていて、イベントホール使っていれば良かったんじゃないか、という気もしました。
+このへんは飲食可なのがイベントホールのみ、という事情もあったのかもしれませんが。</p>
+
+<p>あとはトークとトークの間に休憩時間がもう少し欲しかったですね。
+わりとトイレもギリギリという感じだったので。</p>
+
+<h2>懇親会</h2>
+
+<p>今回は直後に大人の事情があって1時間弱だけ参加でしたが、食事も話も楽しめました。</p>
+
+<h2>LT</h2>
+
+<p>2日目のLTで時間切り詰めになっても、すごい勢いで発表している様は、まさにLightning。</p>
+
+<h2>(個人的な)トラブル</h2>
+
+<p>1日目いきなり寝坊＋東横線のトラブルでオープニングには間に合わなかったのが痛かった……</p>
+
+<h2>次回以降の話</h2>
+
+<p>今回で牧さんとくしいさんが引退ということで、次回以降どうなるのか予想つかない状態ですが、また1,000人以上集まるような大規模なイベントになることを期待したいです。</p>
+
+<p>自分もLTソンあたり挑戦してみたいですね。</p>
+]]></content>
+<id>tag:nira.poi.jp,2013-09-22:blog:entry-2013-09-22-03.html</id>
+<published>2013-09-22T56:56:07+0900</published>
+<updated>2013-09-22T19:56:07+09:00</updated>
+</entry>
 <entry>
 <title type="text">ぶろぐはじめました(n年ぶりm度目)</title>
 <link href="http://nira.poi.jp/blog/entry/2013-09-22-01.html" />
+<author>
+<name>Kenichi Kobayashi</name>
+</author>
 <content><![CDATA[<h1>ぶろぐはじめました(n年ぶりm度目)</h1>
 
 <p>とりあえずYAPC::Asia Tokyo 2013を終わらせるのにBlogつくってみました。</p>
@@ -18,12 +80,15 @@
 <p>Blogつくるにあたってのイロイロは以降のエントリで……</p>
 ]]></content>
 <id>tag:nira.poi.jp,2013-09-22:blog:entry-2013-09-22-01.html</id>
-<published>2013-09-22T49:49:43+0900</published>
-<updated>2013-09-22T17:49:43+09:00</updated>
+<published>2013-09-22T51:51:17+0900</published>
+<updated>2013-09-22T17:51:17+09:00</updated>
 </entry>
 <entry>
 <title type="text">Riji入れてみた</title>
 <link href="http://nira.poi.jp/blog/entry/2013-09-22-02.html" />
+<author>
+<name>Kenichi Kobayashi</name>
+</author>
 <content><![CDATA[<h1>Riji入れてみた</h1>
 
 <p>ちょうど<a href="http://www.songmu.jp/riji/entry/2013-09-21-yapcasia2013-1.html">YAPC::Asia Tokyo 2013のLTでSongmuさんが紹介</a>していた<a href="https://github.com/Songmu/p5-Riji">Riji</a>を使ってみました。</p>
@@ -56,7 +121,7 @@
 <p>せっかく作ったので、こまめに更新できたらなぁ、と。</p>
 ]]></content>
 <id>tag:nira.poi.jp,2013-09-22:blog:entry-2013-09-22-02.html</id>
-<published>2013-09-22T49:49:43+0900</published>
-<updated>2013-09-22T17:49:43+09:00</updated>
+<published>2013-09-22T51:51:17+0900</published>
+<updated>2013-09-22T17:51:17+09:00</updated>
 </entry>
 </feed>
