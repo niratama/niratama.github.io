@@ -19,6 +19,88 @@
 <div class="row">
   <div class="col-md-9">
     <article>
+      <h1><a href="http://nira.poi.jp/blog/entry/2013-10-20-01.html">FreeBSDのportsを一般ユーザー権限でインストールしてみるテスト</a> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://nira.poi.jp/blog/entry/2013-10-20-01.html" data-via="Niratama" data-lang="en">Tweet</a></h1>
+      <div class="pubdate">
+        <time pubdate>2013-10-20 00:45</time>
+      </div>
+      
+
+<p>(論理)今日は朝っぱらから<a href="http://www.yokohama-akarenga.jp/oktoberfest2013/">横浜にビールでも飲み</a>に行くか、と思ってたのに、なぜか昔使ってたFreeBSDな環境を気まぐれで再整備してました。</p>
+
+<p>ただviが素のviだったで、とりあえずなんとかしたいなと思ったんだけど、自分の管理してるサーバじゃないのでユーザー権限だけでなんとかできる方法を探してみました。</p>
+
+<ul>
+<li><a href="http://quantum-public-diary.blogspot.jp/2012/12/portsfreebsd.html">quantum の記録: portsにあるものを一般ユーザとしてインストールする方法(FreeBSD)</a></li>
+</ul>
+
+
+<p>記事中ちょっと気になったのが、</p>
+
+<blockquote><p>でもinstallは途中でsuをしようとして失敗するので、手で配置する。</p></blockquote>
+
+<p>というところで、あのへんいろいろ細工できるようになってた気がしたので、<code>/usr/ports/Mk/bsd.port.mk</code>を読んでみたら、</p>
+
+<pre><code># INSTALL_AS_USER
+#                               - Define this to install as the current user, intended
+#                                 for systems where you have no root access.
+</code></pre>
+
+<p>なんてのを発見。
+あとはシステムのディレクトリ見に行きそうなあたりを回避する目的で<code>NO_PKG_REGISTER</code>とか<code>NO_MTREE</code>あたりを追加してみました。</p>
+
+<p>最終的には以下のような感じ。基本的な流れは元サイトそのままです。</p>
+
+<h3>1. インストール場所の用意、portsの知恵を借りる</h3>
+
+<p>元サイトと配置が違うけど、この辺りはお好みでどうぞ。</p>
+
+<p>vimだけじゃなくて他もインストールする可能性ある気がしたのでこんな感じに。</p>
+
+<pre><code>$ mkdir ~/ports
+$ mkdir ~/ports/ports
+$ mkdir ~/ports/distfiles
+$ cp -r /usr/ports/editors/vim ~/ports/ports/
+</code></pre>
+
+<h3>2. Makefileを編集する</h3>
+
+<p>設定を上書きする部分は、あとで他のportsを入れるときにも使いまわせるように、別ファイルにして<code>.include</code>で読み込むようにしてみました。</p>
+
+<pre><code>INSTALL_AS_USER=yes
+NO_PKG_REGISTER=yes
+NO_MTREE=yes
+DISTDIR=${HOME}/ports/ports/distfiles
+PREFIX=${HOME}/ports
+WRKDIR=/tmp/work
+TARGETDIR=${HOME}/ports
+</code></pre>
+
+<p>上記の内容で<code>~/ports/ports/ports.userspace.mk</code>というファイルを作成しておいて、<code>~/ports/ports/vim/Makefile</code>の先頭に、</p>
+
+<pre><code>.include "../ports.userspace.mk"
+</code></pre>
+
+<p>を追加します。</p>
+
+<h3>3. makeして、installする</h3>
+
+<p>普通にインストールできるようになりました。</p>
+
+<pre><code>$ cd ~/ports/ports/vim/
+$ make
+$ make install
+</code></pre>
+
+<h3>4. 補足</h3>
+
+<p>とりあえずvimに関してはこれで特に問題なかったんですが、その他のportsがこれだけで十分かは不明なので、実際に自分の環境で試してみる場合にはご注意ください。</p>
+
+<p>しかし、vim 7.3のパッチが556個(本家ftp.vim.orgに置いてあるファイルは1,314個)もあって、fetchしてくるときにftpサイトが音を上げてエラーをだしているという……fetchしているときにProtocol errorとか出てても気にしないでください。</p>
+
+<p>これports側でhttpを優先にするかvim.org側である程度の数ごとにtarballにしたほうがいい気が……</p>
+
+    </article>
+    <article>
       <h1><a href="http://nira.poi.jp/blog/entry/2013-09-22-03.html">YAPC::Asia Tokyo 2013に参加してきました</a> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://nira.poi.jp/blog/entry/2013-09-22-03.html" data-via="Niratama" data-lang="en">Tweet</a></h1>
       <div class="pubdate">
         <time pubdate>2013-09-22 19:56</time>
