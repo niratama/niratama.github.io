@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <link rel="alternate" type="application/atom+xml" title="Atom" href="http://nira.poi.jp/blog/atom.xml">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://nira.poi.jp/blog/static/css/main.css" rel="stylesheet">
+  <title>
+続・FreeBSDのportsを一般ユーザー権限でインストールしてみるテスト | 食用ではありません
+  </title>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1 class="page-header"><a href="http://nira.poi.jp/blog/">食用ではありません</a></h1>
+  </header>
+  <section>
+<div class="row">
+  <div class="col-md-9">
+
+    <nav>
+      <ul class="paginate pager">
+        <li class="prev previous"><a href="http://nira.poi.jp/blog/entry/2013-10-20-01.html"><span class="glyphicon glyphicon-backward"></span> FreeBSDのportsを一般ユーザー権限でインストールしてみるテスト</a>
+      </ul>
+    </nav>
+
+    <article>
+      <aside class="tags">
+          <span class="label label-default"><a href="http://nira.poi.jp/blog/tag/freebsd.html">freebsd</a></span>
+      </aside>
+      <div class="entry">
+        <h1><a href="http://nira.poi.jp/blog/entry/2013-10-20-02.html">続・FreeBSDのportsを一般ユーザー権限でインストールしてみるテスト</a> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://nira.poi.jp/blog/entry/2013-10-20-02.html" data-via="Niratama" data-lang="en">Tweet</a></h1>
+        <div class="pubdate">
+          <time pubdate>2013-10-20 02:40</time>
+        </div>
+        
+
+<p>とりあえずblog更新して、ああそういえばgitも入ってないんだよな欲しいよな、と早速流用して<code>make</code>してみたところ、</p>
+
+<pre><code>$ make
+===&gt; Cannot create , check permissions
+*** Error code 1
+</code></pre>
+
+<p>おいおい。という訳で再調査。</p>
+
+<p><code>/usr/ports/Mk</code>をこのメッセージで検索したところ、portsのオプション設定のあたりがどうやら原因のようでした。</p>
+
+<p><code>NO_PKG_REGISTER</code>を設定したので<code>/var/db/ports</code>はそのままで無視していたのですが、どうやらオプション設定するあたりで参照しているようなので、これをダミーで設定するようにしてみました。</p>
+
+<pre><code>PORT_DBDIR=${HOME}/var/db/ports
+</code></pre>
+
+<p>これを<code>~/ports/ports/ports.userspace.mk</code>に追加することで無事makeが通るようになりました。</p>
+
+<p>パーミッションでエラーで出てたくせに、ディレクトリが存在しなくても問題ないのは謎、というかそこまで追っかけてません。</p>
+
+<p>次に<code>make install</code>すると<code>git_daemon</code>を<code>~/ports/etc/rc.d/</code>に置こうとして失敗するので、あらかじめ、</p>
+
+<pre><code>$ mkdir -p ~/ports/etc/rc.d
+</code></pre>
+
+<p>でディレクトリを用意しておきます。(当然<code>git_daemon</code>は使いませんが)</p>
+
+<p>これで無事にgitもインストールできました。</p>
+
+<p>おそらくportsのシステムで参照しているディレクトリをひと通りチェックして対策していれば、こんなにすぐに引っかからなかったんでしょうけど、最低限必要なものが入ればいいだけなので今後も全チェックまではやらないかと。</p>
+
+      </div>
+      <div class="meta">
+        Last modified at 2013-10-20 02:40
+      </div>
+    </article>
+  </section>
+  <footer>
+    <hr>
+    <p>こばやし &#39;にらたま&#39; けんいち <a href="https://twitter.com/Niratama" class="twitter-follow-button" data-show-count="false">Follow @Niratama</a></p>
+  </footer>
+</div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <script>$(function(){$('pre > code').addClass('prettyprint');});</script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</body>
+</html>
