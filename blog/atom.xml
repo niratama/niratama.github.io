@@ -5,10 +5,122 @@
 <author>こばやし &apos;にらたま&apos; けんいち</author>
 <generator uri="https://github.com/Songmu/p5-Riji" version="0.0.11">Perl Riji</generator>
 <id>tag:nira.poi.jp,2013-09-22:blog:</id>
-<updated>2013-10-20T00:47:12+09:00</updated>
+<updated>2013-10-20T02:43:28+09:00</updated>
+<entry>
+<title type="text">NudgePadで遊んでみた -1-</title>
+<link href="http://nira.poi.jp/blog/entry/2013-12-04-01.html" />
+<content><![CDATA[<h1>NudgePadで遊んでみた -1-</h1>
+
+<p>JavaScriptをブラウザ上で試すサイト、ってのはよくある(最近お気に入りの<a href="http://plnkr.co/">Plunker</a>もそのひとつ)んですが、<a href="http://nudgepad.com/">NudgePad</a>というnode.jsのWebサーバをブラウザ上で試せるサイトがある、ということで、面白そうだったので遊んでみました。</p>
+
+<ul>
+<li><a href="http://www.moongift.jp/2013/11/nudgepad-%E8%A9%A6%E3%81%9D%E3%81%86%EF%BC%81web%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AEide%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83/">NudgePad - 試そう!WebベースのIDE&amp;実行環境</a></li>
+</ul>
+
+
+<h2>サインアップ</h2>
+
+<p><a href="http://nudgepad.com/">http://nudgepad.com/</a> にアクセスすると、 <a href="http://landing.nudgepad.com/">http://landing.nudgepad.com/</a> にリダイレクトされてサインアップ画面になります。</p>
+
+<p>プロジェクトURLは、重複するものがなければ再確認なしで作成されるので、Start Project ボタンを押すときは用心したほうが良さそうです。</p>
+
+<h2>とりあえずセキュリティ対策</h2>
+
+<p>プロジェクトが無事作成されるとファイル一覧画面になります。</p>
+
+<p>この時点で用意されているのは index.html と nudgepad/ ディレクトリですが、ここにあるファイル<strong>すべてが</strong>プロジェクトURLから公開されている状態です。</p>
+
+<p>nudgepad/ ディレクトリにはログインに必要な情報も入っているので、ファイル名さえわかっていれば<strong>丸見え</strong>になります。</p>
+
+<p>とりあえず用心のため、 nアイコン → Labs → Private でプライベートファイルの設定をしてしまいます。(なんでこんな重要な機能が Labs なのかは謎)</p>
+
+<p>テキストエリアに <code>/nudgepad/</code> を入力して Save して、 Restart でサーバを再起動すると、とりあえずnudgepadディレクトリ以下はログインしているユーザー以外にはみえなくなって一安心です。</p>
+
+<h2>まずサーバ側を試してみる</h2>
+
+<p>nアイコン → Server でサーバ側のログとシステム情報が確認できます。ここにコンソールもあって、直接コマンドを実行することもできます。</p>
+
+<p>ここで Menu → Edit App.js すると、以下の内容の app.js というファイルがWebサーバのひな形として作られます。</p>
+
+<pre><code>module.exports = function (app) {
+  app.get('/hello', function (req, res, next) {
+    res.send('Hello world')
+  })
+}
+</code></pre>
+
+<p>Restart でサーバを再起動すると、 app.js が起動時に読み込まれます。</p>
+
+<p>ひな形には /hello へのリクエストに文字列を返す処理が入っているので、試しに http://プロジェクトURL/hello にアクセスすると、 app.jsに書いてある処理の通りに “Hello world” が表示されるはずです。</p>
+
+<p>ちなみに、フレームワークは<a href="http://expressjs.com/">express</a>の3.1.1が使われているようです。</p>
+
+<p>あと、 app.js はさすがに特別扱いされているようで、 http://プロジェクトURL/app.js にアクセスしても、 "app.js is private" と表示されるだけで中身は見えませんでした。</p>
+
+<h2>GitHubとの連携</h2>
+
+<p>nアイコン → Labs の一覧に Git とかあったので試してみました。</p>
+
+<p>Commands メニューにgit関係のコマンドが用意されています。</p>
+
+<p>まず、 Install で<code>git init</code>が(あとたぶん<code>git add .</code>も)実行されて、リポジトリが初期化されます。</p>
+
+<p>実行結果にも書いてありますが、ユーザー名とメールアドレスを設定しろ、と言われるのですが、 Git 画面からは設定できないらしく、コンソールから</p>
+
+<pre><code>git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+</code></pre>
+
+<p>をそれぞれ実行することで設定する必要があります。</p>
+
+<p>設定が終わったら Commit でコミットしておきます。</p>
+
+<p>次にGitHubにリポジトリを用意して、 Create Deploy Key で SSH Key を作るんですが、ポップアップに小さく Key が表示されます。うっかり閉じてしまった場合は /nudgepad/deploy.key.pub に Key が格納されてます。</p>
+
+<p>お察しの通り、 Private で隠しておかないと、Private Keyともども<strong>丸見え</strong>です。</p>
+
+<p>GitHubのリポジトリの Deploy Key にこの Key を設定すれば、NudgePadからGitHubにアクセスできるようになります。Connect to GitHub でGitHubへの接続テストができますが、 ~/.ssh にディレクトリがないとエラーになるので、コンソールから</p>
+
+<pre><code>mkdir ~/.ssh
+chmod 700 ~/.ssh
+</code></pre>
+
+<p>で用意するのが吉です。</p>
+
+<p>あとは、 Add Origin でGitHubのリポジトリURL(SSHのほう)を設定して Push to Origin すれば、GitHubのリポジトリにファイルが格納されます。</p>
+
+<p>さっき書いたとおり、コンソールから普通にgitコマンド使えるので、いざとなればいつもどおりの運用もできるかと。</p>
+
+<h2>ログイン機構</h2>
+
+<p>ここまできてもまだ「ログイン」らしい作業をなにもしてないですが、ユーザー認証情報はCookieに入っているだけなので、ほっとくとログインできなくなってしまいます。</p>
+
+<p>nアイコン → Team にユーザー認証まわりの設定がありますが、作りかけ感たっぷりなシロモノで、メニュー名が"undefined"になってたり、メニューの Login Link を選んでも肝心の部分が"undefined"になったダメっぽいURLが表示されるだけだったりします。</p>
+
+<p>普通にプロジェクトを作ったままの場合、ユーザーのメールアドレスは owner@プロジェクト名.nudgepad.com になっています。チームメンバーなら後述するログイン画面でメールアドレスを入力すれば、メールでログイン用のURLが送られてきますが、このままでは当然メールが届きません。</p>
+
+<p>というわけで、 Change Email で自分のメールアドレスを入力するのがここでの正解のようです。</p>
+
+<p>で、 Logout を選んだり、Cookieが消えたりしてログインし直す時はどうするのか、というと、 http://プロジェクトURL/nudgepad にアクセスするとログイン画面が表示されるので、登録しておいたメールアドレス入力して Get Login Link をクリックすると、ログイン用のURLがメールで送られてきます。</p>
+
+<p>お察しの通り、ログイン機構はとても簡易なもので、このURLがバレてしまうとログインできてしまうというレベルのものです。もともと本格的なものに使うサイトではありませんが要注意ポイントです。</p>
+
+<h2>今日はここまで</h2>
+
+<p>まだほんのさわりだけですが、NudgePadを使いはじめるにあたって必要そうなあたりをまとめてみました。</p>
+
+<p>使ってくうえでいろいろ問題もあったりするんですが、個人的にはそれ込みで楽しめているので、しばらく付き合っていこうかと思っています。</p>
+]]></content>
+<id>tag:nira.poi.jp,2013-12-05:blog:entry-2013-12-04-01.html</id>
+<published>2013-12-05T52:52:46+0900</published>
+<updated>2013-12-05T00:52:46+09:00</updated>
+</entry>
 <entry>
 <title type="text">続・FreeBSDのportsを一般ユーザー権限でインストールしてみるテスト</title>
 <link href="http://nira.poi.jp/blog/entry/2013-10-20-02.html" />
+<author>
+<name>Kenichi Kobayashi</name>
+</author>
 <content><![CDATA[<h1>続・FreeBSDのportsを一般ユーザー権限でインストールしてみるテスト</h1>
 
 <p>とりあえずblog更新して、ああそういえばgitも入ってないんだよな欲しいよな、と早速流用して<code>make</code>してみたところ、</p>
@@ -43,8 +155,8 @@
 <p>おそらくportsのシステムで参照しているディレクトリをひと通りチェックして対策していれば、こんなにすぐに引っかからなかったんでしょうけど、最低限必要なものが入ればいいだけなので今後も全チェックまではやらないかと。</p>
 ]]></content>
 <id>tag:nira.poi.jp,2013-10-20:blog:entry-2013-10-20-02.html</id>
-<published>2013-10-20T40:40:48+0900</published>
-<updated>2013-10-20T02:40:48+09:00</updated>
+<published>2013-10-20T43:43:28+0900</published>
+<updated>2013-10-20T02:43:28+09:00</updated>
 </entry>
 <entry>
 <title type="text">FreeBSDのportsを一般ユーザー権限でインストールしてみるテスト</title>
@@ -132,7 +244,7 @@ $ make install
 ]]></content>
 <id>tag:nira.poi.jp,2013-10-20:blog:entry-2013-10-20-01.html</id>
 <published>2013-10-20T47:47:12+0900</published>
-<updated>2013-10-20T00:47:12+09:00</updated>
+<updated>2013-10-20T02:43:28+09:00</updated>
 </entry>
 <entry>
 <title type="text">YAPC::Asia Tokyo 2013に参加してきました</title>

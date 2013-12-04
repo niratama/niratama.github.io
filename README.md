@@ -8,6 +8,8 @@ Edit your 'riji.yml'.
 
 Edit your blog entry by markdown notation, save into 'article/entry' and git commit it.
 
+    % riji new-entry
+
 3rd step
 --------
 
@@ -23,3 +25,5 @@ You can publish static blog directory as follows.
     % riji publish
 
 'blog/' directory is created. Now, you can publish it to any servers.
+
+* <http://songmu.github.io/p5-Riji/blog/>
