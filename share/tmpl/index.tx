@@ -10,6 +10,9 @@
       </div>
       <: $entry.html_body_without_title() | mark_raw :>
     </article>
+    : if ! $~entry.is_last {
+    <hr />
+    : }
   : }
   </div>
   <div class="col-md-3">
