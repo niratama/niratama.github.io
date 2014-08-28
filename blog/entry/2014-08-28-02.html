@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <link rel="alternate" type="application/atom+xml" title="Atom" href="http://nira.poi.jp/blog/atom.xml">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://nira.poi.jp/blog/static/css/main.css" rel="stylesheet">
+  <title>
+YAPC::Asia Tokyo 2014 0日目メモ | 食用ではありません
+  </title>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1 class="page-header"><a href="http://nira.poi.jp/blog/">食用ではありません</a></h1>
+  </header>
+  <section>
+<div class="row">
+  <div class="col-md-9">
+
+    <nav>
+      <ul class="paginate pager">
+        <li class="prev previous"><a href="http://nira.poi.jp/blog/entry/2014-08-28-01.html"><span class="glyphicon glyphicon-backward"></span> 長いことさぼってました</a>
+      </ul>
+    </nav>
+
+    <article>
+      <aside class="tags">
+          <span class="label label-default"><a href="http://nira.poi.jp/blog/tag/yapc.html">yapc</a></span>
+          <span class="label label-default"><a href="http://nira.poi.jp/blog/tag/perl.html">perl</a></span>
+      </aside>
+      <div class="entry">
+        <h1><a href="http://nira.poi.jp/blog/entry/2014-08-28-02.html">YAPC::Asia Tokyo 2014 0日目メモ</a> <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://nira.poi.jp/blog/entry/2014-08-28-02.html" data-via="Niratama" data-lang="en">Tweet</a></h1>
+        <div class="pubdate">
+          <time pubdate>2014-08-29 00:42</time>
+        </div>
+        
+
+<p>というわけで前夜祭から参加してきました。</p>
+
+<p><a href="http://twilog.org/Niratama/hashtags-yapcasia">Twilog</a>も参照のこと。</p>
+
+<h2>受付</h2>
+
+<p>17:30から受付という事だったので時間合わせて行ったらまだ準備中でした。</p>
+
+<p>結局だいたい17:45くらいに受付開始。
+この時間から来てる人は訓練された個人スポンサーが多かったようで、一般列がらがらなのに個人スポンサー列が行列という不思議な状態に。</p>
+
+<h2>開場</h2>
+
+<p>ビールやソフトドリンクの他に、今回は<a href="http://labo.dmm.com/information/2014/0729/">DMMかき氷</a>が配られてました。
+数日前までならちょうどよかったのかもしれないけど、残念ながら今日はだいぶ涼しかったせいで微妙な感じに。
+でも、なかなか美味しかったので、いい時期に売ってたら普通に買うレベルじゃないかと。</p>
+
+<h2>欲しいものは作ればいい! 〜Webアプリ10連発〜</h2>
+
+<p>まず @yusukebe さんから。ライブラリや環境が揃ってきた今だから、ということでこの企画だそうで。</p>
+
+<h3>GeekDojo / @__papix__ さん</h3>
+
+<ul>
+<li>短期間でのリリースにはやっぱりテストと属人性の排除が重要</li>
+<li>Botやツールを組み合わせて通知や自動化ってのもよさそう</li>
+</ul>
+
+
+<h3>hrhm.info / @hondallica さん</h3>
+
+<ul>
+<li>ネットにあるデータを複数収集して組み合わせることで自サービス向けのデータを作っている</li>
+<li>収集には専用にPCを用意していて、最初はとにかく集めるのが重要</li>
+</ul>
+
+
+<h3>pplog / @ppworks さん</h3>
+
+<ul>
+<li>herokuですぐリリースできるベースアプリを作ってテンプレートのかわりに使っている
+
+<ul>
+<li>飽きる前に・小さく・最初は挑戦しない・小さく挑戦する、を実現するのに良さそう</li>
+</ul>
+</li>
+<li>開発者が中の人ぶらない、ってのは情報集約の点でも大事なのかもしれない</li>
+</ul>
+
+
+<h3>ゴミ収集カレンダー / @syachi さん</h3>
+
+<ul>
+<li>音声読上げ用のHTMLから正規表現でデータをスクレイピングしているとの事。パターンが多くて大変そう</li>
+<li>Google CalendarからアクセスするiCalは<code>text/calendar; charset=utf-8</code>でないと文字化けを起こすそうだ</li>
+</ul>
+
+
+<h3>wri.pe / @masuidrive さん</h3>
+
+<ul>
+<li>自分の欲しいものを自分で作った結果としてのサービス</li>
+<li>データを別サービスにバックアップできるようにするというのはサービス継続の話だけじゃなくて、ユーザー自身乗り換えのときとか、トラブルのときにも有効な気がする</li>
+<li>ちなみに今回の記事の元になったメモも、この発表聞いてるとき以後はwri.peを使って書いてます</li>
+</ul>
+
+
+<h3>プライベートで3年間チーム開発した話 / @hika69 さん</h3>
+
+<ul>
+<li>単一のサービスじゃなくてチーム開発でいくつかサービスを立ちあげた話</li>
+<li>とにかくサービスを完成させるのが大事</li>
+</ul>
+
+
+<h3>ttyrecからGIFアニメを作る話 / @sugyan さん</h3>
+
+<ul>
+<li>ttyrecの出力ファイルをGIFアニメ化するツールを作ってWebサービス化した話</li>
+</ul>
+
+
+<h3>GIFMAGAZINEの話 / @razokulover さん</h3>
+
+<ul>
+<li>GIFアニメを見られるサイトはたくさんあるけど、GIFアニメを作るところからやりたかったとの事</li>
+<li>一番使って欲しいユーザー向けの機能の取捨選択がWebサービスの強みに繋がるようだ</li>
+</ul>
+
+
+<h3>togetter / @yositosi さん</h3>
+
+<ul>
+<li>もともとはイベントのレポートを用意するかわりにツイートをまとめられるようにしたのが発端だそうだ</li>
+</ul>
+
+
+<h3>クイズを支える技術 / @debility さん</h3>
+
+<ul>
+<li>スタッフ入りから30min or die</li>
+<li>余興に使えるのは30min or die</li>
+<li>手書き部分を署名の電子化に使えるんじゃないかとかいう話が出ている</li>
+</ul>
+
+
+<h2>雑感</h2>
+
+<p>後半アルコールのせいかメモがまとめきれてない感じになってて薄くなってますが（笑）</p>
+
+<p>とにかく小さくてもとりあえず作って始めてしまうのが大事なんだなという感じ。</p>
+
+<p>ネタもロクに思いつかないのになにか作りたい気分になってくる発表でした。</p>
+
+      </div>
+      <div class="meta">
+        Last modified at 2014-08-29 00:42
+      </div>
+    </article>
+  </section>
+  <footer>
+    <hr>
+    <p>こばやし &#39;にらたま&#39; けんいち <a href="https://twitter.com/Niratama" class="twitter-follow-button" data-show-count="false">Follow @Niratama</a></p>
+  </footer>
+</div>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+  <script>$(function(){$('pre > code').addClass('prettyprint');});</script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</body>
+</html>
